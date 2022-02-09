@@ -13,7 +13,7 @@ char* cfstrCreate( const char* s ){
     unsigned sz = strlen(s);
     unsigned* psz = (unsigned*) malloc( sz * sizeof(char) + sizeof(sz) );
     char* q = (char*)(psz+1);
-    *psz = sz-1;
+    *psz = sz;
     memcpy( q, s, sz * sizeof(char) );
     return q;
 }
