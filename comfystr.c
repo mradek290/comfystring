@@ -10,10 +10,10 @@ void cfstrFree( char* s ){
 
 char* cfstrCreate( const char* s ){
 
-    unsigned sz = strlen(s);
+    unsigned sz = 1 + strlen(s);
     unsigned* psz = (unsigned*) malloc( sz * sizeof(char) + sizeof(sz) );
     char* q = (char*)(psz+1);
-    *psz = sz;
+    *psz = sz-1;
     memcpy( q, s, sz * sizeof(char) );
     return q;
 }
