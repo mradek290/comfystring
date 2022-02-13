@@ -8,24 +8,22 @@ void cfstrFree( char* s ){
     free( ((unsigned*)s)-1 );
 }
 
-char* cfstrCreate( const char* s ){
+char* cfstrCreateSz( const char* s, unsigned ssz ){
 
-    unsigned sz = 1 + strlen(s);
-    unsigned* psz = (unsigned*) malloc( sz * sizeof(char) + sizeof(sz) );
+    unsigned* psz = (unsigned*) malloc( sizeof(unsigned) + (ssz+1) * sizeof(char) );
     char* q = (char*)(psz+1);
-    *psz = sz-1;
-    memcpy( q, s, sz * sizeof(char) );
+    memcpy( q, s, ssz );
+    q[ssz] = 0;
+    *psz = ssz;
     return q;
 }
 
-char* cfstrCopy( char* s ){
+char* cfstrCreate( const char* s ){
+    return cfstrCreateSz( s, strlen(s) );
+}
 
-    unsigned ssz = 1 + cfstrSize(s);
-    unsigned* psz = (unsigned*) malloc( ssz * sizeof(char) + sizeof(ssz) );
-    char* q = (char*)(psz+1);
-    *psz = ssz-1;
-    memcpy( q, s, ssz * sizeof(char) );
-    return q;
+char* cfstrCopy( char* s ){
+    return cfstrCreateSz( s, cfstrSize(s) );
 }
 
 char* cfstrSubString( char* s, unsigned p0, unsigned p1 ){

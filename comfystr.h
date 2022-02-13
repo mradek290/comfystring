@@ -7,6 +7,7 @@
 #include <ctype.h>
 
 void  cfstrFree( char* );
+char* cfstrCreateSz( const char*, unsigned );
 char* cfstrCreate( const char* );
 char* cfstrCopy( char* );
 char* cfstrSubString( char*, unsigned, unsigned );
